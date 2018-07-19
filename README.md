@@ -6,7 +6,7 @@
 
 # 授权流程说明
 
-整体流程如下：
+整体流程如下：
 
 ```
 1. 第三方发起授权，在用户同意授权第三方应用之后，开放平台会拉起第三方应用或者重定向第三方网站，带上临时票据 code
@@ -32,7 +32,7 @@ https://open.youchainapi.com/connect/oauth2/authorize?appid=APPID&redirect_uri=R
 | --------   | -----:   | :----: |
 | appid        | 是      |   应用的 appid    |
 | redirect_uri        | 是     |   授权后重定向的链接地址，请使用 urlEncode 对链接进行处理，并保证与应用管理中心中的配置一致    |
-| response_type        | 是     |   必须是 code     |
+| response_type        | 是     |   必须是 code     |
 |scope|是|授权域，snsapi_base 可以获取 openid，snsapi_userinfo 可以获取用户基本信息，snsapi_asset 可以获取用户资产相关信息，后一种 scope 包含前一种 scope|
 |否|是|重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节|
 
@@ -72,7 +72,7 @@ https://api.youchainapi.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&co
 | appid        | 是      |   应用的 appid    |
 | secret        | 是     |   应用的 appsecret    |
 |code|是|填写第一步获取的 code 参数|
-| grant_type        | 是     |   必须是 authorization_code     |
+| grant_type        | 是     |   必须是 authorization_code     |
 
 返回说明：
 
