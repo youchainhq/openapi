@@ -79,11 +79,11 @@ https://api.youchainapi.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&co
 正确返回时的 json 数据如下：
 
 ```
-{ 
+{
 "access_token":"ACCESS_TOKEN",
 "expires_in":7200,
 "openid":"OPENID",
-"scope":"SCOPE" 
+"scope":"SCOPE"
 }
 ```
 
@@ -130,6 +130,7 @@ https://api.youchainapi.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID
 "province_name":"PROVINCE_NAME"
 "country_name":"COUNTRY_NAME",
 "avatar":"https://ucimg.ihuanqu.com/avatar/54f69c/6b83f463310db6b2c8181d09fc-1600614462193664.jpg",
+"cloudauth":"1"
 }
 ```
 
@@ -141,6 +142,7 @@ https://api.youchainapi.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID
 |province_name	|省份|
 |country_name	|国家|
 |avatar	|头像|
+|cloudauth| 0 未认证,  1 认证中 2 通过认证  3 临时认证  4 认证失败|
 
 错误返回，示例为 openid 无效:
 
