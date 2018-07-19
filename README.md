@@ -58,7 +58,7 @@ code 说明 ： code 作为换取 access_token 的票据，每次用户授权带
 
 *注意，因为这一步涉及到 appsecret 的使用，十分重要，必须第三方的服务器中发起，同时开放平台也会有 ip 白名单的设置*
 
-### 发起如下请求
+### 发起如下请求
 
 ```
 GET
@@ -100,7 +100,7 @@ https://api.youchainapi.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&co
 {"errcode":40029,"errmsg":"invalid code"}
 ```
 
-# 第三步：拉取用户信息(需scope为 snsapi_userinfo)
+# 第三步：拉取用户信息(需 scope 为 snsapi_userinfo)
 
 ### 发起如下请求
 
