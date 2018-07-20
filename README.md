@@ -126,7 +126,7 @@ https://api.youchainapi.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID
 {
 "openid":" OPENID",
 "username": USERNAME,
-"gender":"1",
+"gender":1,
 "province_name":"PROVINCE_NAME"
 "country_name":"COUNTRY_NAME",
 "avatar":"https://ucimg.ihuanqu.com/avatar/54f69c/6b83f463310db6b2c8181d09fc-1600614462193664.jpg",
