@@ -34,7 +34,7 @@ https://open.youchainapi.com/connect/oauth2/authorize?appid=APPID&redirect_uri=R
 | redirect_uri        | 是     |   授权后重定向的链接地址，请使用 urlEncode 对链接进行处理，并保证与应用管理中心中的配置一致    |
 | response_type        | 是     |   必须是 code     |
 |scope|是|授权域，snsapi_base 可以获取 openid，snsapi_userinfo 可以获取用户基本信息，snsapi_asset 可以获取用户资产相关信息，后一种 scope 包含前一种 scope|
-|state|是|重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节|
+|state|否|重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节|
 
 下图说明授权页面：
 
