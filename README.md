@@ -106,7 +106,7 @@ https://api.youchainapi.com/oauth2/access_token?appid=APPID&secret=SECRET&code=C
 错误返回，示例为 code 无效错误：
 
 ```
-{"errcode":40029,"errmsg":"invalid code"}
+{"errcode":41006,"errmsg":"已过期"}
 ```
 
 ### 错误说明
