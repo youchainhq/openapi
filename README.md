@@ -16,7 +16,7 @@
 
 如下图：
 
-![时序图](./arts/oauth20-sequence.png)
+![时序图](arts/oauth20-sequence.png)
 
 # 第一步：请求 code
 
@@ -33,26 +33,35 @@ https://open.youchainapi.com/connect/oauth2/authorize?appid=APPID&redirect_uri=R
 | appid        | 是      |   应用的 appid    |
 | redirect_uri        | 是     |   授权后重定向的链接地址，请使用 urlEncode 对链接进行处理，并保证与应用管理中心中的配置一致    |
 | response_type        | 是     |   必须是 code     |
-|scope|是|授权域，snsapi_base 可以获取 openid，snsapi_userinfo 可以获取用户基本信息，snsapi_asset 可以获取用户资产相关信息，后一种 scope 包含前一种 scope|
+|scope|是|授权域，snsapi_base 可以获取 openid，snsapi_userinfo 可以获取用户基本信息|
 |state|否|重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节|
 
 下图说明授权页面：
 
-//todo
+![授权页面](arts/user-authorize.png)
 
 ### 用户授权后
 
 如果用户同意授权，页面将跳转至 redirect_uri/?code=CODE&state=STATE。
 
 ```
-code 说明 ： code 作为换取 access_token 的票据，每次用户授权带上的 code 将不一样，code 只能使用一次，10分钟未被使用自动过期。
+code 说明 ： code 作为换取 access_token 的票据，每次用户授权带上的 code 将不一样，code 只能使用一次，5 分钟未被使用自动过期。
 ```
 
 ### 错误说明
 
 |错误号|说明|
 | --- | --- |
-|10003|redirect_uri 域名与后台配置不一致|
+|40000|appid 不能为空|
+|40001|appid 错误|
+|40002|app 状态错误|
+|40003|redirect_uri 不能为空|
+|40004|redirect_uri 域名与后台配置不一致|
+|40005|scope 不能为空|
+|40006|scope 不存在|
+|40007|scope 错误|
+|40008|response_type 不能为空|
+|40009|response_type 必须是 code|
 
 # 第二步：通过 code 换取 access_token
 
@@ -71,7 +80,7 @@ https://api.youchainapi.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&co
 | --------   | -----:   | :----: |
 | appid        | 是      |   应用的 appid    |
 | secret        | 是     |   应用的 appsecret    |
-|code|是|填写第一步获取的 code 参数|
+| code         |是    |填写第一步获取的 code 参数|
 | grant_type        | 是     |   必须是 authorization_code     |
 
 返回说明：
@@ -100,52 +109,20 @@ https://api.youchainapi.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&co
 {"errcode":40029,"errmsg":"invalid code"}
 ```
 
+### 错误说明
+
+|错误号|说明|
+| --- | --- |
+|41001|appid 不能为空|
+|41002|appid 错误|
+|41003|code 不能为空|
+|41004|code 不存在|
+|41005|code 已使用过|
+|41006|code 已过期|
+|41007|secret 不能为空|
+|41008|secret 错误|
+|41009|grant_type 必须是 authorization_code|
+
 # 第三步：拉取用户信息(需 scope 为 snsapi_userinfo)
 
-### 发起如下请求
-
-```
-GET
-https://api.youchainapi.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
-```
-
-参数说明：
-
-
-| 参数        | 必须    |  说明  |
-| --------   | -----:   | :----: |
-| access_token        | 是      |   上一步拿到的 access_token  |
-| openid        | 是     |  用户唯一标识    |
-|lang|是|国家地区和语言版本|
-
-返回说明
-
-正确时返回的JSON数据包如下：
-
-```
-{
-"openid":" OPENID",
-"username": USERNAME,
-"gender":1,
-"province_name":"PROVINCE_NAME"
-"country_name":"COUNTRY_NAME",
-"avatar":"https://ucimg.ihuanqu.com/avatar/54f69c/6b83f463310db6b2c8181d09fc-1600614462193664.jpg",
-"cloudauth":"1"
-}
-```
-
-|字段|说明|
-| --- | --- |
-|openid|用户的唯一标识|
-|username|用户名|
-|gender|性别 0 未设置 1 男 2 女|
-|province_name	|省份|
-|country_name	|国家|
-|avatar	|头像|
-|cloudauth| 0 未认证,  1 认证中 2 通过认证  3 临时认证  4 认证失败|
-
-错误返回，示例为 openid 无效:
-
-```
-{"errcode":40003,"errmsg":" invalid openid "}
-```
+请参考 [API 文档](api.md)
