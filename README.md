@@ -71,7 +71,7 @@ code 说明 ： code 作为换取 access_token 的票据，每次用户授权带
 
 ```
 GET
-https://api.youchainapi.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
+https://api.youchainapi.com/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
 ```
 
 参数说明：
