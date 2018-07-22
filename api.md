@@ -47,13 +47,13 @@ https://api.youchainapi.com/users/show?access_token=ACCESS_TOKEN&openid=OPENID
 {
   "ret":0,
   "data":{
-  "openid":" OPENID",
-  "username": USERNAME,
-  "gender":1,
-  "province_name":"PROVINCE_NAME"
-  "country_name":"COUNTRY_NAME",
-  "avatar":"https://ucimg.ihuanqu.com/avatar/54f69c/6b83f463310db6b2c8181d09fc-1600614462193664.jpg",
-  "cloudauth":"1"
+    "openid":" OPENID",
+    "username": USERNAME,
+    "gender":1,
+    "province_name":"PROVINCE_NAME"
+    "country_name":"COUNTRY_NAME",
+    "avatar":"https://ucimg.ihuanqu.com/avatar/54f69c/6b83f463310db6b2c8181d09fc-1600614462193664.jpg",
+    "cloudauth":"1"
   }
 }
 ```
