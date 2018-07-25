@@ -1,17 +1,3 @@
-# 环境
-
-授权页面：
-```
-测试环境：https://dev-open.youchainapi.com
-正式环境：https://open.youchainapi.com
-```
-
-API：
-```
-测试环境：https://dev-api.youchainapi.com
-正式环境：https://api.youchainapi.com
-```
-
 # API 返回语义
 
 ```
