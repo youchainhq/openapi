@@ -20,7 +20,7 @@
 
 ## 统一下单接口 
 接口说明：<br>
-该接口用于第三方支付时下单操作，成功后将支付数据传递给jsapi以唤醒有令支付插件，弹出支付密码输入框并完成后续支付流程
+该接口用于dapp支付时下单操作，成功后将支付数据传递给jsapi以唤醒有令支付插件，弹出支付密码输入框并完成后续支付流程
 ```
 POST
 https://open.youchainapi.com/mchpay/order/create
@@ -179,7 +179,7 @@ Content-Type: application/json
 
 ## 订单查询接口 
 接口说明：<br>
-该接口用于第三方查询支付接口，一般用于未收到支付回调时处理
+该接口用于dapp查询支付接口，一般用于未收到支付回调时处理
 ```
 GET
 https://open.youchainapi.com/mchpay/order/query
