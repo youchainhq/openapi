@@ -23,7 +23,7 @@
 该接口用于dapp支付时下单操作，成功后将支付数据传递给jsapi以唤醒有令支付插件，弹出支付密码输入框并完成后续支付流程
 ```
 POST
-https://open.youchainapi.com/mchpay/order/create
+https://open.youchainapi.com/payment/order/create
 Content-Type: application/json
 ```
 参数说明：
@@ -77,7 +77,7 @@ Content-Type: application/json
 | ---      | --- |
 |appId     |注册dapp时返回的appid |
 |nonceStr  |随机字符串 |
-|payType   | 交易类型 JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付 |
+|payType   |交易类型 JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付 |
 |content   |支付数据 |
 |timeStamp |时间戳（毫秒）|
 |signType  |签名类型 MD5 |
@@ -104,7 +104,7 @@ Content-Type: application/json
 该接口用于用户输入支付密码后JSAPI调用完成最终支付流程
 ```
 POST
-https://open.youchainapi.com/jspay/order/pay
+https://open.youchainapi.com/payment/order/pay
 Content-Type: application/json
 ```
 参数说明：
@@ -116,8 +116,8 @@ Content-Type: application/json
 | nonceStr      | 是      | String(32)  |  随机字符串（统一下单接口返回的nonceStr） |
 | signType      | 是      | String(32)  |  签名类型：固定值MD5，（统一下单接口返回的signType） |
 | sign          | 是      | String(32)  |  参数签名，防篡改（统一下单接口返回的sign） |
-| payType       | 是      | String(32)  |  payType（统一下单接口返回的sign） |
-| content       | 是      | String(1000)|  支付数据   |
+| payType       | 是      | String(32)  |  JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付（统一下单接口返回的payType） |
+| content       | 是      | String(1000)|  支付数据（统一下单接口返回的content） |
 | password      | 否      | String(80)  |  用户支付密码（password和payToken必须二选一）  |
 | payToken      | 否      | String(80)  |  用户支付指纹码（password和payToken必须二选一）|
 | uuid          | 否      | String(80)  |  指纹码uuid（若传payToken，则必须传uuid）   |
@@ -181,7 +181,7 @@ Content-Type: application/json
 该接口用于dapp查询支付接口，一般用于未收到支付回调时处理
 ```
 GET
-https://open.youchainapi.com/mchpay/order/query
+https://open.youchainapi.com/payment/order/query
 ```
 参数说明：
 
