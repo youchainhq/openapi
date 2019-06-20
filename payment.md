@@ -30,9 +30,9 @@ Content-Type: application/json
 
 | 参数           | 必传    | 类型/限制    |  说明  |
 | --------      | -----:  | --------:   | :---- |
-| appId         | 是      | String(32)  |  注册dapp时返回的appid  |
-| mchId         | 是      | String(32)  |  注册开放平台账户时返回的mchId |
-| openId        | 是      | String(80)  |  下单用户的openId    |
+| appId         | 是      | String(40)  |  注册dapp时返回的appid  |
+| mchId         | 是      | String(40)  |  注册开放平台账户时返回的mchId |
+| openId        | 是      | String(64)  |  下单用户的openId    |
 | deviceInfo    | 否      | String(32)  |  设备号 H5页面可以传值WEB    |
 | nonceStr      | 是      | String(32)  |  随机字符串    |
 | signType      | 是      | String(32)  |  签名类型，目前只支持MD5。传MD5    |
@@ -44,10 +44,10 @@ Content-Type: application/json
 | redirectUrl   | 否      | String(255) |  交易成功后的跳转URL，需给绝对路径，255 字以内，必须为外网可访问的url，不能携带参数。 |
 | timeStart     | 否      | String(14)  |  商家交易起始时间 格式为yyyyMMddHHmmss，如2009年12月25日9点10分10秒表示为20091225091010，该时间取自商户服务器 |
 | timeExpire    | 否      | String(14)  |  商家订单失效时间 格式为yyyymmddhhmmss，如2009年12月25日9点10分10秒表示为20091225091010，该时间取自商户服务器 |
-| payType       | 是      | String(10)  |  交易类型 JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付    |
+| payType       | 是      | String(32)  |  交易类型 JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付    |
 | mchCreateIp   | 是      | String(128) |  商户下单服务器的ip    |
 | feeType       | 是      | String(32)  |  币种 默认YOU：YOU    |
-| totalFee      | 是      | String(128) |  支付总金额    |
+| totalFee      | 是      | String(32)  |  支付总金额    |
 参数示例：
 ```
 {
@@ -111,7 +111,7 @@ Content-Type: application/json
 
 | 参数           | 必传    | 类型/限制    |  说明  |
 | --------      | -----:  | --------:   | :---- |
-| appId         | 是      | String(32)  |  注册的appid（统一下单接口返回的appId）  |
+| appId         | 是      | String(40)  |  注册的appid（统一下单接口返回的appId）  |
 | timestamp     | 是      | String(32)  |  时间戳（统一下单接口返回的timestamp） |
 | nonceStr      | 是      | String(32)  |  随机字符串（统一下单接口返回的nonceStr） |
 | signType      | 是      | String(32)  |  签名类型：固定值MD5，（统一下单接口返回的signType） |
@@ -187,8 +187,8 @@ https://open.youchainapi.com/payment/order/query
 
 | 参数           | 必传    | 类型/限制    |  说明  |
 | --------      | -----:  | --------:   | :---- |
-| appId         | 是      | String(32)  |  注册dapp时返回的appid  |
-| mchId         | 是      | String(32)  |  注册开放平台账户时返回的mchId |
+| appId         | 是      | String(40)  |  注册dapp时返回的appid  |
+| mchId         | 是      | String(40)  |  注册开放平台账户时返回的mchId |
 | prepayId      | 否      | String(80)  |  有令开放平台交易号 prepayId与outTradeNo必须二传一 |
 | outTradeNo    | 否      | String(32)  |  商户订单号 prepayId与outTradeNo必须二传一 |
 | nonceStr      | 是      | String(32)  |  随机字符串    |
