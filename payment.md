@@ -16,10 +16,76 @@
 # 支付流程
 ![支付流程图](arts/PAYMENT.png)
 
+## 生成随机数算法
+有令开放API接口协议中包含字段nonceStr，主要保证签名不可预测。我们推荐生成随机数算法如下：使用不带"-"的uuid。
+
+## 数字签名
+签名生成的通用步骤如下：  
+第一步，设所有发送或者接收到的数据为集合M，除sign字段外，将集合M内非空参数值的参数按照参数名ASCII码从小到大排序（字典序），使用URL键值对的格式（即key1=value1&key2=value2…）拼接成字符串stringA。  
+特别注意以下重要规则：  
+◆ 参数名ASCII码从小到大排序（字典序）；  
+◆ 如果参数的值为空不参与签名；  
+◆ 参数sign不参与签名；  
+◆ 参数名区分大小写；  
+◆ 验证调用返回或有令开放平台主动通知签名时，传送的sign参数不参与签名，将生成的签名与该sign值作校验。  
+◆ 有令开放平台返回的应答或通知消息可能会由于升级增加参数，验证签名时必须支持增加的扩展字段  
+第二步，在stringA最后拼接上key得到stringSignTemp字符串，并对stringSignTemp进行MD5运算，再将得到的字符串所有字符转换为大写，得到sign值signValue。  
+◆ key设置路径：有令开放平台或找有令运营人员获取  
+举例：假设传送的参数如下：
+```$xslt
+POST方式：Content-Type: application/json
+{
+    "appId": "yc984a80fbebd32e7fd18f0b61e2cfb2d1",
+    "mchId": "test_mch_id_001",
+    "deviceInfo": "WEB",
+    "nonceStr": "25c88b08c01f4c28b494cc005054cf86",
+    "signType": "MD5",
+    "body": "购买VIP元宝"
+}
+```
+或
+```$xslt
+GET方式：
+appId=yc984a80fbebd32e7fd18f0b61e2cfb2d1&mchId=test_mch_id_001&deviceInfo=WEB&&nonceStr=25c88b08c01f4c28b494cc005054cf86&signType=MD5&body=购买VIP元宝 
+```
+第一步：对参数按照key=value的格式，并按照参数名ASCII字典序排序如下：
+```$xslt
+stringA="appId=yc984a80fbebd32e7fd18f0b61e2cfb2d1&body=购买VIP元宝&deviceInfo=WEB&mchId=test_mch_id_001&nonceStr=25c88b08c01f4c28b494cc005054cf86&signType=MD5"
+```
+第二步：拼接API密钥：  
+```$xslt
+stringSignTemp=stringA+"&key=192006250b4c09247ec02edce69f6a2d" //注：key为有令开放平台设置的appSecret或找有令运营人员获取
+sign=MD5(stringSignTemp).toUpperCase()="16A6E08A0A3D88DEC5A9EA6B7ADD0467" //注：signType=MD5时的签名方式
+```
+最终得到最终发送的数据：
+```$xslt
+POST方式：
+{
+    "appId": "yc984a80fbebd32e7fd18f0b61e2cfb2d1",
+    "mchId": "test_mch_id_001",
+    "deviceInfo": "WEB",
+    "nonceStr": "25c88b08c01f4c28b494cc005054cf86",
+    "signType": "MD5",
+    "body": "购买VIP元宝",
+    "sign": "16A6E08A0A3D88DEC5A9EA6B7ADD0467"
+}
+```
+或
+```
+GET方式：
+appId=yc984a80fbebd32e7fd18f0b61e2cfb2d1&mchId=test_mch_id_001&deviceInfo=WEB&&nonceStr=25c88b08c01f4c28b494cc005054cf86&signType=MD5&body=购买VIP元宝&sign=16A6E08A0A3D88DEC5A9EA6B7ADD0467
+```
+
+## 补单回调机制
+注意:  
+对后台通知交互模式，如果有令开放平台回调接口收到商家的应答不是“success”或超时，会认为通知失败，然后通过一定的策略(如45分钟共8次)定期重新发起通知，尽可能提高通知的成功率，但不保证通知最终能成功。  
+由于存在重新发􏰘后台通知的情况，因此同样的通知可能会多次发􏰘给商户系统。商户系统必须能够正确处理重复的通知。有令开放平台推荐的做法是，当收到通知进行处理时，首先检查对应业务数据的状态，判断该通知是否已经处理过，如果没有处理过再进行处理，如果处理过直接返回“success”。在对业务数据进行状态检查和处理之前，要采用数据􏰙进行并发控制，以避免函数重入造成的数据混乱。
+
+
 # 开放平台支付API 列表
 
 ## 统一下单接口（dapp服务端调用） 
-接口说明：<br>
+接口说明：  
 该接口用于dapp支付时下单操作，成功后将支付数据传递给jsapi以唤醒有令支付插件，弹出支付密码输入框并完成后续支付流程
 ```
 POST
@@ -100,7 +166,7 @@ Content-Type: application/json
 ```
 
 ## 支付接口 （js调用）
-接口说明：<br>
+接口说明：  
 该接口用于用户输入支付密码后JSAPI调用完成最终支付流程
 ```
 POST
@@ -177,7 +243,7 @@ Content-Type: application/json
 ```
 
 ## 订单查询接口 （dapp服务端调用）
-接口说明：<br>
+接口说明：  
 该接口用于dapp查询支付接口，一般用于未收到支付回调时处理
 ```
 GET
