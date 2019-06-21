@@ -60,6 +60,7 @@ sign=MD5(stringSignTemp).toUpperCase()="16A6E08A0A3D88DEC5A9EA6B7ADD0467" //注�
 最终得到最终发送的数据：
 ```$xslt
 POST方式：
+Content-Type: application/json
 {
     "appId": "yc984a80fbebd32e7fd18f0b61e2cfb2d1",
     "mchId": "test_mch_id_001",
@@ -90,32 +91,32 @@ appId=yc984a80fbebd32e7fd18f0b61e2cfb2d1&mchId=test_mch_id_001&deviceInfo=WEB&&n
 ```
 POST
 https://open.youchainapi.com/payment/order/create
-Content-Type: application/json
 ```
 参数说明：
 
-| 参数           | 必传    | 类型/限制    |  说明  |
+| 参数           | 必传    | 类型/限制    | 说明  |
 | --------      | -----:  | --------:   | :---- |
-| appId         | 是      | String(40)  |  注册dapp时返回的appid  |
-| mchId         | 是      | String(40)  |  注册开放平台账户时返回的mchId |
-| openId        | 是      | String(64)  |  下单用户的openId    |
-| deviceInfo    | 否      | String(32)  |  设备号 H5页面可以传值WEB    |
-| nonceStr      | 是      | String(32)  |  随机字符串    |
-| signType      | 是      | String(32)  |  签名类型，目前只支持MD5。传MD5    |
-| sign          | 是      | String(32)  |  参数签名，防篡改    |
-| outTradeNo    | 是      | String(32)  |  商户订单号    |
-| body          | 否      | String(128) |  商品描述    |
-| attach        | 否      | String(128) |  附加数据，在查询API和支付通知中原样返回，可作为自定义参数使用    |
-| notifyUrl     | 是      | String(255) |  接收回调通知的URL，需给绝对路径，255 字以内，必须为外网可访问的url，不能携带参数 |
-| redirectUrl   | 否      | String(255) |  交易成功后的跳转URL，需给绝对路径，255 字以内，必须为外网可访问的url，不能携带参数。 |
-| timeStart     | 否      | String(14)  |  商家交易起始时间 格式为yyyyMMddHHmmss，如2009年12月25日9点10分10秒表示为20091225091010，该时间取自商户服务器 |
-| timeExpire    | 否      | String(14)  |  商家订单失效时间 格式为yyyymmddhhmmss，如2009年12月25日9点10分10秒表示为20091225091010，该时间取自商户服务器 |
-| payType       | 是      | String(32)  |  交易类型 JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付    |
-| mchCreateIp   | 是      | String(128) |  商户下单服务器的ip    |
-| feeType       | 是      | String(32)  |  币种 默认YOU：YOU    |
-| totalFee      | 是      | String(32)  |  支付总金额    |
+| appId         | 是      | String(40)  | 注册dapp时返回的appid  |
+| mchId         | 是      | String(40)  | 注册开放平台账户时返回的mchId |
+| openId        | 是      | String(64)  | 下单用户的openId |
+| deviceInfo    | 否      | String(32)  | 设备号 H5页面可以传值WEB |
+| outTradeNo    | 是      | String(32)  | 商户订单号 |
+| body          | 否      | String(128) | 商品描述 |
+| attach        | 否      | String(128) | 附加数据，在查询API和支付通知中原样返回，可作为自定义参数使用 |
+| notifyUrl     | 是      | String(255) | 接收回调通知的URL，需给绝对路径，255 字以内，必须为外网可访问的url，且为商家授信的域名下，不能携带参数 |
+| redirectUrl   | 否      | String(255) | 交易成功后的跳转URL，需给绝对路径，255 字以内，必须为外网可访问的url，且为商家授信的域名下。 |
+| timeStart     | 否      | String(14)  | 商家交易起始时间 格式为yyyyMMddHHmmss，如2009年12月25日9点10分10秒表示为20091225091010，该时间取自商户服务器 |
+| timeExpire    | 否      | String(14)  | 商家订单失效时间 格式为yyyymmddhhmmss，如2009年12月25日9点10分10秒表示为20091225091010，该时间取自商户服务器 |
+| payType       | 是      | String(32)  | 交易类型 JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付 |
+| mchCreateIp   | 是      | String(128) | 商户下单服务器的ip |
+| feeType       | 是      | String(32)  | 币种 默认YOU：YOU |
+| totalFee      | 是      | String(32)  | 支付总金额 |
+| nonceStr      | 是      | String(32)  | 随机字符串 |
+| signType      | 是      | String(32)  | 签名类型，目前只支持MD5。传MD5 |
+| sign          | 是      | String(32)  | 参数签名，防篡改 |
 参数示例：
 ```
+Content-Type: application/json
 {
     "appId": "yc984a80fbebd32e7fd18f0b61e2cfb2d1",
     "mchId": "test_mch_id_001",
@@ -139,15 +140,15 @@ Content-Type: application/json
 ```
 返回值说明：
 
-| 字段      |说明 |
-| ---      | --- |
-|appId     |注册dapp时返回的appid |
-|nonceStr  |随机字符串 |
-|payType   |交易类型 JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付 |
-|content   |支付数据 |
-|timeStamp |时间戳（毫秒）|
-|signType  |签名类型 MD5 |
-|sign	   |签名|
+| 字段      | 说明 |
+| ---       | --- |
+| appId     | 注册dapp时返回的appid |
+| payType   | 交易类型 JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付 |
+| content   | 支付数据 |
+| timeStamp | 时间戳（毫秒）|
+| nonceStr  | 随机字符串 |
+| signType  | 签名类型 MD5 |
+| sign	    | 签名 |
 返回值示例：
 ```$xslt
 {
@@ -171,24 +172,24 @@ Content-Type: application/json
 ```
 POST
 https://open.youchainapi.com/payment/order/pay
-Content-Type: application/json
 ```
 参数说明：
 
-| 参数           | 必传    | 类型/限制    |  说明  |
+| 参数           | 必传    | 类型/限制    | 说明  |
 | --------      | -----:  | --------:   | :---- |
-| appId         | 是      | String(40)  |  注册的appid（统一下单接口返回的appId）  |
-| timestamp     | 是      | String(32)  |  时间戳（统一下单接口返回的timestamp） |
-| nonceStr      | 是      | String(32)  |  随机字符串（统一下单接口返回的nonceStr） |
-| signType      | 是      | String(32)  |  签名类型：固定值MD5，（统一下单接口返回的signType） |
-| sign          | 是      | String(32)  |  参数签名，防篡改（统一下单接口返回的sign） |
-| payType       | 是      | String(32)  |  JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付（统一下单接口返回的payType） |
-| content       | 是      | String(1000)|  支付数据（统一下单接口返回的content） |
-| password      | 否      | String(80)  |  用户支付密码（password和payToken必须二选一）  |
-| payToken      | 否      | String(80)  |  用户支付指纹码（password和payToken必须二选一）|
-| uuid          | 否      | String(80)  |  指纹码uuid（若传payToken，则必须传uuid）   |
+| appId         | 是      | String(40)  | 注册的appid（统一下单接口返回的appId） |
+| timestamp     | 是      | String(32)  | 时间戳（统一下单接口返回的timestamp） |
+| payType       | 是      | String(32)  | JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付（统一下单接口返回的payType） |
+| content       | 是      | String(1000)| 支付数据（统一下单接口返回的content） |
+| nonceStr      | 是      | String(32)  | 随机字符串（统一下单接口返回的nonceStr） |
+| signType      | 是      | String(32)  | 签名类型：固定值MD5，（统一下单接口返回的signType） |
+| sign          | 是      | String(32)  | 参数签名，防篡改（统一下单接口返回的sign） |
+| password      | 否      | String(80)  | 用户支付密码（password和payToken必须二选一） |
+| payToken      | 否      | String(80)  | 用户支付指纹码（password和payToken必须二选一）|
+| uuid          | 否      | String(80)  | 指纹码uuid（若传payToken，则必须传uuid） |
 参数示例：
 ```
+Content-Type: application/json
 {
     "appId": "yc984a80fbebd32e7fd18f0b61e2cfb2d1",
     "nonceStr": "aa0210b76a6045f2bdf4049a21ef34e8",
@@ -204,21 +205,21 @@ Content-Type: application/json
 ```
 返回值说明：
 
-| 字段       |说明 |
-| ---        | --- |
-|appId       |注册dapp时返回的appid |
-|appName     |注册dapp时返回的appname |
-|timeStamp   |时间戳（毫秒）|
-|nonceStr    |随机字符串 |
-|feeType     |实际支付币种 YOU |
-|totalFee    |实际支付金额 |
-|timePaid    |实际支付时间，格式为yyyyMMddHHmmss|
-|orderStatus |订单状态 |
-|prepayId    |有令开放平台订单号 |
-|outTradeNo  |商家订单号 |
-|redirectUrl |前端redirect地址，若为空直接关闭窗体不回调 |
-|signType    |签名类型 MD5 |
-|sign	     |签名|
+| 字段        | 说明 |
+| ---         | --- |
+| appId       | 注册dapp时返回的appid |
+| appName     | 注册dapp时返回的appname |
+| timeStamp   | 时间戳（毫秒）|
+| nonceStr    | 随机字符串 |
+| feeType     | 实际支付币种 YOU |
+| totalFee    | 实际支付金额 |
+| timePaid    | 实际支付时间，格式为yyyyMMddHHmmss|
+| orderStatus | 订单状态 |
+| prepayId    | 有令开放平台订单号 |
+| outTradeNo  | 商家订单号 |
+| redirectUrl | 前端redirect地址，若为空直接关闭窗体不回调 |
+| signType    | 签名类型 MD5 |
+| sign	      | 签名 |
 返回值示例：
 ```$xslt
 {
@@ -251,39 +252,39 @@ https://open.youchainapi.com/payment/order/query
 ```
 参数说明：
 
-| 参数           | 必传    | 类型/限制    |  说明  |
+| 参数           | 必传    | 类型/限制    | 说明  |
 | --------      | -----:  | --------:   | :---- |
-| appId         | 是      | String(40)  |  注册dapp时返回的appid  |
-| mchId         | 是      | String(40)  |  注册开放平台账户时返回的mchId |
-| prepayId      | 否      | String(80)  |  有令开放平台交易号 prepayId与outTradeNo必须二传一 |
-| outTradeNo    | 否      | String(32)  |  商户订单号 prepayId与outTradeNo必须二传一 |
-| nonceStr      | 是      | String(32)  |  随机字符串    |
-| signType      | 是      | String(32)  |  签名类型，目前只支持MD5。  |
-| sign          | 是      | String(32)  |  参数签名，防篡改    |
+| appId         | 是      | String(40)  | 注册dapp时返回的appid |
+| mchId         | 是      | String(40)  | 注册开放平台账户时返回的mchId |
+| prepayId      | 否      | String(80)  | 有令开放平台交易号 prepayId与outTradeNo必须二传一 |
+| outTradeNo    | 否      | String(32)  | 商户订单号 prepayId与outTradeNo必须二传一 |
+| nonceStr      | 是      | String(32)  | 随机字符串 |
+| signType      | 是      | String(32)  | 签名类型，目前只支持MD5 |
+| sign          | 是      | String(32)  | 参数签名，防篡改 |
 
 返回值说明：
 
-| 字段            |说明 |
+| 字段            | 说明  |
 | ---            | --- |
-|appId           |注册dapp时返回的appid |
-|mchId           |注册开放平台账户时返回的mchId |
-|openId          |下单用户的openId |
-|deviceInfo      |下单接口传的设备号 |
-|nonceStr        |随机字符串 |
-|signType        |签名类型 MD5 |
-|sign	         |签名|
-|prepayId        |有令开放平台交易号|
-|outTradeNo      |商户订单号|
-|payType         | 交易类型 JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付 |
-|orderStatus     |订单状态：NOTPAY未支付，PAID已支付，CLOSED已超时关闭，PAYERROR支付失败，REFUND已退款|
-|body	         |商品描述|
-|attach	         |附加数据，在查询API和支付通知中原样返回，可作为自定义参数使用|
-|timeStart	     |商家订单开始时间，格式为yyyyMMddHHmmss|
-|timeExpire	     |商家订单过期时间，格式为yyyyMMddHHmmss|
-|totalFee	     |支付金额|
-|feeType	     |支付币种：YOU|
-|timePaid	     |实际支付时间，格式为yyyyMMddHHmmss|
-|mchWalletAddress|商家收款钱包地址|
+| appId           | 注册dapp时返回的appid |
+| mchId           | 注册开放平台账户时返回的mchId |
+| openId          | 下单用户的openId |
+| deviceInfo      | 下单接口传的设备号 |
+| nonceStr        | 随机字符串 |
+| signType        | 签名类型 MD5 |
+| sign	          | 签名|
+| prepayId        | 有令开放平台交易号 |
+| outTradeNo      | 商户订单号 |
+| payType         | 交易类型 JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付 |
+| orderStatus     | 订单状态：NOTPAY未支付，PAID已支付，CLOSED已超时关闭，PAYERROR支付失败，REFUND已退款 |
+| body	          | 商品描述 |
+| attach	      | 附加数据，在查询API和支付通知中原样返回，可作为自定义参数使用 |
+| timeStart	      | 商家订单开始时间，格式为yyyyMMddHHmmss |
+| timeExpire	  | 商家订单过期时间，格式为yyyyMMddHHmmss |
+| totalFee	      | 支付金额 |
+| feeType	      | 支付币种：YOU |
+| timePaid	      | 实际支付时间，格式为yyyyMMddHHmmss |
+| mchWalletAddress| 商家收款钱包地址 |
 返回值示例：
 ```$xslt
 {
@@ -312,3 +313,62 @@ https://open.youchainapi.com/payment/order/query
     }
 }
 ```
+
+## 支付完成通知接口 （有令开放平台调用dapp服务端的notifyUrl）
+接口说明：  
+该接口用于有令开放平台通知dapp服务端该笔支付已完成
+```
+POST
+统一下单接口商家传入的notifyUrl
+```
+参数说明：
+
+| 参数           | 类型        | 说明 |
+| --------      | --------:   | :---- |
+| appId         | String(40)  | 注册dapp时返回的appid |
+| mchId         | String(40)  | 注册开放平台账户时返回的mchId |
+| openId        | String(80)  | 下单用户的openId |
+| deviceInfo    | String(32)  | 设备号 H5页面可以传值WEB |
+| prepayId      | String(80)  | 有令开放平台交易号 |
+| outTradeNo    | String(32)  | 商户订单号 |
+| payType       | String(32)  | 交易类型 JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付 |
+| orderStatus   | String(32)  | 订单支付状态 PAID—支付成功 REFUND—转入退款 PAYERROR-支付失败 CLOSED-订单已关闭 NOTPAY-未支付 |
+| attach        | String(128) | 附加数据，在查询API和支付通知中原样返回，可作为自定义参数使用 |
+| timeStart     | String(14)  | 商家交易起始时间 格式为yyyyMMddHHmmss，如2009年12月25日9点10分10秒表示为20091225091010 |
+| timeExpire    | String(14)  | 商家订单失效时间 格式为yyyymmddhhmmss，如2009年12月25日9点10分10秒表示为20091225091010 |
+| totalFee      | String(32)  | 支付总金额 |
+| feeType       | String(32)  | 币种 默认YOU：YOU |
+| timePaid      | String(14)  | 订单实际支付时间 格式为yyyymmddhhmmss，如2009年12月25日9点10分10秒表示为20091225091010 |
+| mchWalletAddress|String(128)| 商家收款钱包地址 |
+| nonceStr      | String(32)  | 随机字符串 |
+| signType      | String(32)  | 签名类型，目前只支持MD5 |
+| sign          | String(32)  | 参数签名，防篡改 |
+
+参数示例：
+```$xslt
+Content-Type: application/json
+{
+    "appId": "yc984a80fbebd32e7fd18f0b61e2cfb2d1",
+    "mchId": "test_mch_id_001",
+    "openId": "OGEwZTU4NTJlNjA1ZWM3N2IxOTIzZGQ2NjFlM2I3YTI",
+    "deviceInfo": "WEB",
+    "nonceStr": "3b45f2f47772478287ee604585d8e56f",
+    "signType": "MD5",
+    "sign": "6ECB30C4543764C1D1E48E6F24128849",
+    "prepayId": "201906191644498078338763128370237440",
+    "outTradeNo": "201906131745270002100201064",
+    "payType": "JSAPI",
+    "orderStatus": "PAID",
+    "attach": "storeId=220000011&operator=lzol",
+    "timeStart": "20190613163510",
+    "timeExpire": "20190623163510",
+    "totalFee": 5.22,
+    "feeType": "YOU",
+    "mchWalletAddress", "wallet_address_001",
+    "timePaid": "20190619164504"
+}
+```
+有令开放平台通过调用notifyUrl通知商家，商家做业务处理后，需要以字符串的形式反馈处理结果，若处理成功内容为: success  
+返回值说明：  
+有令开放平台收到HTTP状态码是"200 OK"且响应体为success时表示处理成功，此后不再进行后续通知  
+其它情况处理不成功（未收到任何响应或超时）（HTTP状态码不是"200 OK"）（HTTP状态码是"200 OK"但响应体不为success），有令开放平台通过补单机制再次通知
