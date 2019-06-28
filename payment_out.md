@@ -1,3 +1,15 @@
+
+# 版本号 （V1.0.0 ）
+V1.0.0    
+北京有链科技有限公司
+
+### 版本说明
+* V1.0.0    
+2019-06-28 添加统一下单接口，订单查询接口，支付回调通知
+
+# 本文阅读对象
+供有令dapp开发人员参考和查询。
+
 # 环境
 ```
 测试环境：https://dev-open.youchainapi.com
@@ -14,7 +26,7 @@
 }
 ```
 # 支付流程
-![支付流程图](https://note.youdao.com/yws/api/personal/file/WEB458f37e7d9eb2adb64fb03a745b3346f?method=download&shareKey=0357d1ed5b28685ec5b14e4a46777913)
+![支付流程图](https://note.youdao.com/yws/api/personal/file/WEBe44787c6566819c022b258205e8ee44f?method=download&shareKey=dd63aed274026659befcba74746857b5)
 
 ## 生成随机数算法
 有令开放API接口协议中包含字段nonceStr，主要保证签名不可预测。我们推荐生成随机数算法如下：使用不带"-"的uuid。
@@ -194,99 +206,6 @@ Content-Type: application/json
 | 42024     | redirectUrl格式不正确 |
 
 
-## 支付接口 （js调用）
-接口说明：  
-该接口用于用户输入支付密码后JSAPI调用完成最终支付流程
-```
-POST
-https://open.youchainapi.com/payment/order/pay
-```
-参数说明：
-
-| 参数           | 必传    | 类型/限制    | 说明  |
-| --------      | -----:  | --------:   | :---- |
-| appId         | 是      | String(40)  | 注册的appid（统一下单接口返回的appId） |
-| timestamp     | 是      | String(32)  | 时间戳（统一下单接口返回的timestamp） |
-| payType       | 是      | String(32)  | JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付（统一下单接口返回的payType） |
-| content       | 是      | String(1000)| 支付数据（统一下单接口返回的content） |
-| nonceStr      | 是      | String(32)  | 随机字符串（统一下单接口返回的nonceStr） |
-| signType      | 是      | String(32)  | 签名类型：固定值MD5，（统一下单接口返回的signType） |
-| sign          | 是      | String(32)  | 参数签名，防篡改（统一下单接口返回的sign） |
-| feeId         | 是      | String(32)  | 支付方式id，用you支付该数值为you，用纪念币支付该值为纪念币的id（统一下单接口返回的feeId） |
-| totalFee      | 是      | String(32)  | 支付总额（统一下单接口返回的totalFee） |
-| password      | 否      | String(80)  | 用户支付密码 |
-| payToken      | 否      | String(80)  | 用户支付指纹码 |
-| uuid          | 否      | String(80)  | 指纹码uuid |
-参数示例：
-```
-Content-Type: application/json
-{
-    "appId": "yc984a80fbebd32e7fd18f0b61e2cfb2d1",
-    "nonceStr": "aa0210b76a6045f2bdf4049a21ef34e8",
-    "signType": "MD5",
-    "sign": "FDDBF373054F86AB66180E08C5086912",
-    "payType": "JSAPI",
-    "content": "prepayId=201906191644498078338763128370237440;outTradeNo=201906131745270002100201064",
-    "timestamp": "1560933889650",
-    "feeId": "you",
-    "totalFee": "5.22"
-    "password": "",
-    "payToken": "",
-    "uuid": ""
-}
-```
-返回值说明：
-
-| 字段        | 说明 |
-| ---         | --- |
-| appId       | 注册dapp时返回的appid |
-| appName     | 注册dapp时返回的appname |
-| timeStamp   | 时间戳（毫秒）|
-| nonceStr    | 随机字符串 |
-| feeType     | 实际支付币种 YOU |
-| totalFee    | 实际支付金额 |
-| timePaid    | 实际支付时间，格式为yyyyMMddHHmmss|
-| orderStatus | 订单状态 |
-| prepayId    | 有令开放平台订单号 |
-| outTradeNo  | 商家订单号 |
-| redirectUrl | 前端redirect地址，若为空直接关闭窗体不回调 |
-| signType    | 签名类型 MD5 |
-| sign	      | 签名 |
-返回值示例：
-```$xslt
-{
-    "msg": "",
-    "ret": 0,
-    "data": {
-        "appId": "yc984a80fbebd32e7fd18f0b61e2cfb2d1",
-        "appName": "测试应用",
-        "timestamp": "1560933904",
-        "nonceStr": "9ab1b2a7e4074b3aa22ec769d59493e1",
-        "signType": "MD5",
-        "sign": "EB37C6543B3810CAC21E624F0BCE81BF",
-        "prepayId": "201906191644498078338763128370237440",
-        "outTradeNo": "201906131745270002100201064",
-        "orderStatus": "PAID",
-        "feeType": "you",
-        "totalFee": "5.2200",
-        "timePaid": "20190619164504",
-        "redirectUrl": "https://wxapp.80sis.com/gametest.html?gameid=testgameid"
-    }
-}
-```
-错误说明：
-
-| 字段      | 说明 |
-| ---       | --- |
-| 11001     | 参数解析错误 |
-| 11012     | 参数错误 |
-| 42002     | 用户余额不足 |
-| 42011     | 找不到该订单 |
-| 42013     | 该订单未支付已超时关闭 |
-| 42014     | 该订单已支付失败 |
-| 42015     | 该订单已支付 |
-| 42022     | timeExpire已过期 |
-
 ## 订单查询接口 （dapp服务端调用）
 接口说明：  
 该接口用于dapp查询支付接口，一般用于未收到支付回调时处理
@@ -370,7 +289,7 @@ https://open.youchainapi.com/payment/order/query
 | 42012     | 该订单未发起支付 |
 | 42014     | 该订单已支付失败 |
 
-## 支付完成通知接口 （有令开放平台调用dapp服务端的notifyUrl）
+## 支付回调通知接口 （有令开放平台调用dapp服务端的notifyUrl）
 接口说明：  
 该接口用于有令开放平台通知dapp服务端该笔支付已完成
 ```
@@ -427,4 +346,5 @@ Content-Type: application/json
 有令开放平台通过调用notifyUrl通知商家，商家做业务处理后，需要以字符串的形式反馈处理结果，若处理成功内容为: success  
 返回值说明：  
 有令开放平台收到HTTP状态码是"200 OK"且响应体为success时表示处理成功，此后不再进行后续通知  
-其它情况处理不成功（未收到任何响应或超时）（HTTP状态码不是"200 OK"）（HTTP状态码是"200 OK"但响应体不为success），有令开放平台通过补单机制再次通知
+其它情况处理不成功（未收到任何响应或超时）（HTTP状态码不是"200 OK"）（HTTP状态码是"200 OK"但响应体不为success），有令开放平台通过补单机制再次通知  
+该接口不能保证100%回调成功，具体操作请参考【补单回调机制】  
