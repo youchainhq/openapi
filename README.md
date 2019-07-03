@@ -128,4 +128,4 @@ https://api.youchainapi.com/oauth2/access_token?appid=APPID&secret=SECRET&code=C
 请参考 [用户API文档](api.md)
 
 # 有令开放平台支付接口
-请参考 [支付API文档](payment.md)
+请参考 [支付API文档](payment_out.md)
