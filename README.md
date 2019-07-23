@@ -135,4 +135,4 @@ https://api.youchainapi.com/oauth2/access_token?appid=APPID&secret=SECRET&code=C
 
 # 有令开放平台支付JSAPI接口
 
-请参考 [JSAPI文档](jspi.md)
+请参考 [JSAPI文档](jsapi.md)
