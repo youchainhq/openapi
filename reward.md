@@ -38,7 +38,7 @@ Content-Type: application/json
 | amount        | 是      | String(32)  | 奖励数量、金额 |
 | nonceStr      | 是      | String(32)  | 随机字符串 |
 | signType      | 是      | String(32)  | 签名类型，目前只支持MD5。传MD5 |
-| sign          | 是      | String(32)  | 参数签名，防篡改 |
+| sign          | 是      | String(32)  | 参数签名，防篡改，请参考 [【数字签名规则】](sign.md) |
 
 返回说明：
 

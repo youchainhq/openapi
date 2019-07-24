@@ -16,7 +16,7 @@ https://dev-open.youchainapi.com/assets/user/query?appId=APPID&openid=OPENID&fee
 | openId        | 是     |  用户唯一标识    |
 | feeType      | 否    |  查询资产的类型  you、gold_coin、silver_coin、copper_coin、whale_coin等 |
 | signType      | 是    |  加密方式。固定值：MD5    |
-| sign      | 是    |  加密值    |
+| sign      | 是    |  参数签名，防篡改，请参考 [【数字签名规则】](sign.md)   |
 
 返回说明：
 

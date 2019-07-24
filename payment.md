@@ -5,67 +5,6 @@
 
 注意：使用支付接口前提条件是需要dapp已绑定用户收款的有令用户id，如需手动绑定，请联系有令运营人员。
 
-## 生成随机数算法
-有令开放API接口协议中包含字段nonceStr，主要保证签名不可预测。我们推荐生成随机数算法如下：使用不带"-"的uuid。
-
-## 数字签名
-签名生成的通用步骤如下：  
-第一步，设所有发送或者接收到的数据为集合M，除sign字段外，将集合M内非空参数值的参数按照参数名ASCII码从小到大排序（字典序），使用URL键值对的格式（即key1=value1&key2=value2…）拼接成字符串stringA。  
-特别注意以下重要规则：  
-◆ 参数名ASCII码从小到大排序（字典序）；  
-◆ 如果参数的值为空不参与签名；  
-◆ 参数sign不参与签名；  
-◆ 参数名区分大小写；  
-◆ 验证调用返回或有令开放平台主动通知签名时，传送的sign参数不参与签名，将生成的签名与该sign值作校验。  
-◆ 有令开放平台返回的应答或通知消息可能会由于升级增加参数，验证签名时必须支持增加的扩展字段  
-第二步，在stringA最后拼接上key得到stringSignTemp字符串，并对stringSignTemp进行MD5运算，再将得到的字符串所有字符转换为大写，得到sign值signValue。  
-◆ key设置路径：有令开放平台或找有令运营人员获取  
-举例：假设传送的参数如下：
-```$xslt
-POST方式：Content-Type: application/json
-{
-    "appId": "yc984a80fbebd32e7fd18f0b61e2cfb2d1",
-    "mchId": "test_mch_id_001",
-    "deviceInfo": "WEB",
-    "nonceStr": "25c88b08c01f4c28b494cc005054cf86",
-    "signType": "MD5",
-    "body": "购买VIP元宝"
-}
-```
-或
-```$xslt
-GET方式：
-appId=yc984a80fbebd32e7fd18f0b61e2cfb2d1&mchId=test_mch_id_001&deviceInfo=WEB&&nonceStr=25c88b08c01f4c28b494cc005054cf86&signType=MD5&body=购买VIP元宝 
-```
-第一步：对参数按照key=value的格式，并按照参数名ASCII字典序排序如下：
-```$xslt
-stringA="appId=yc984a80fbebd32e7fd18f0b61e2cfb2d1&body=购买VIP元宝&deviceInfo=WEB&mchId=test_mch_id_001&nonceStr=25c88b08c01f4c28b494cc005054cf86&signType=MD5"
-```
-第二步：拼接API密钥：  
-```$xslt
-stringSignTemp=stringA+"&key=192006250b4c09247ec02edce69f6a2d" //注：key为有令开放平台设置的appSecret或找有令运营人员获取
-sign=MD5(stringSignTemp).toUpperCase()="16A6E08A0A3D88DEC5A9EA6B7ADD0467" //注：signType=MD5时的签名方式
-```
-最终得到最终发送的数据：
-```$xslt
-POST方式：
-Content-Type: application/json
-{
-    "appId": "yc984a80fbebd32e7fd18f0b61e2cfb2d1",
-    "mchId": "test_mch_id_001",
-    "deviceInfo": "WEB",
-    "nonceStr": "25c88b08c01f4c28b494cc005054cf86",
-    "signType": "MD5",
-    "body": "购买VIP元宝",
-    "sign": "16A6E08A0A3D88DEC5A9EA6B7ADD0467"
-}
-```
-或
-```
-GET方式：
-appId=yc984a80fbebd32e7fd18f0b61e2cfb2d1&mchId=test_mch_id_001&deviceInfo=WEB&&nonceStr=25c88b08c01f4c28b494cc005054cf86&signType=MD5&body=购买VIP元宝&sign=16A6E08A0A3D88DEC5A9EA6B7ADD0467
-```
-
 ## 补单回调机制
 注意:  
 对后台通知交互模式，如果有令开放平台回调接口收到商家的应答不是“success”或超时，会认为通知失败，然后通过一定的策略(如45分钟共8次)定期重新发起通知，尽可能提高通知的成功率，但不保证通知最终能成功。
@@ -103,7 +42,7 @@ https://open.youchainapi.com/payment/order/create
 | totalFee      | 是      | String(32)  | 支付总金额 |
 | nonceStr      | 是      | String(32)  | 随机字符串 |
 | signType      | 是      | String(32)  | 签名类型，目前只支持MD5。传MD5 |
-| sign          | 是      | String(32)  | 参数签名，防篡改 |
+| sign          | 是      | String(32)  | 参数签名，防篡改，请参考 [【数字签名规则】](sign.md) |
 参数示例：
 ```
 Content-Type: application/json
@@ -201,7 +140,7 @@ https://open.youchainapi.com/payment/order/query
 | outTradeNo    | 否      | String(32)  | 商户订单号 prepayId与outTradeNo必须二传一 |
 | nonceStr      | 是      | String(32)  | 随机字符串 |
 | signType      | 是      | String(32)  | 签名类型，目前只支持MD5 |
-| sign          | 是      | String(32)  | 参数签名，防篡改 |
+| sign          | 是      | String(32)  | 参数签名，防篡改，请参考 [【数字签名规则】](sign.md)  |
 
 返回值说明：
 
@@ -295,7 +234,7 @@ POST
 | mchWalletAddress|String(128)| 商家收款钱包地址 |
 | nonceStr      | String(32)  | 随机字符串 |
 | signType      | String(32)  | 签名类型，目前只支持MD5 |
-| sign          | String(32)  | 参数签名，防篡改 |
+| sign          | String(32)  | 参数签名，防篡改，请参考 [【数字签名规则】](sign.md) |
 
 参数示例：
 ```$xslt
