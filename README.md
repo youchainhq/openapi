@@ -1,138 +1,66 @@
-# 基本概念
 
-有令开放平台授权登陆是基于 OAuth2.0 协议标准构建。
+# 版本号 （V1.0.0 ）
+V1.1.0    
+北京有链科技有限公司
 
-在进行有令授权接入前，请在开放平台中注册开发者账号，创建应用，获得 appid 和 appsecret，配置相关参数。
+### 版本说明
+* V1.0.0    
+2019-06-28 添加统一下单接口，订单查询接口，支付回调通知
+* V1.1.0    
+2019-07-24 添加用户资产接口，发放奖励接口、登录授权接入示例
+
+# 接入前期准备
+
+在接入有令开放平台前，请在开放平台中注册开发者账号，创建应用，获得 appid 和 appsecret，配置相关参数。
 
 [申请应用](./apply.md)
 
-# 授权流程说明
 
-整体流程如下：
+# 本文阅读对象
+供有令dapp开发人员参考和查询。
 
+# 环境
 ```
-1. 第三方发起授权在用户同意授权第三方应用之后，开放平台会拉起第三方应用或者重定向第三方网站，带上临时票据 code
-2. 第三方应用通过 code 参数，带上 appid 和 appsecret，通过调用 API 换取 access_token
-3. 第三方应用，通过 access_token 进行接口调用，获取用户信息和实现操作
-```
-
-如下图：
-
-![时序图](arts/oauth20-sequence.png)
-
-# 第一步：请求 code
-
-### 引导用户打开如下页面
-
-```
-https://open.youchainapi.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE
+测试环境：https://dev-open.youchainapi.com
+正式环境：https://open.youchainapi.com
 ```
 
-参数说明：
-
-| 参数        | 必须    |  说明  |
-| --------   | -----:   | :----: |
-| appid        | 是      |   应用的 appid    |
-| redirect_uri        | 是     |   授权后重定向的链接地址，请使用 urlEncode 对链接进行处理，并保证与应用管理中心中的配置一致    |
-| response_type        | 是     |   必须是 code     |
-|scope|是|授权域，snsapi_base 可以获取 openid，snsapi_userinfo 可以获取用户基本信息|
-|state|否|重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节|
-
-下图说明授权页面：
-
-![授权页面](arts/user-authorize.png)
-
-### 用户授权后
-
-如果用户同意授权，页面将跳转至 redirect_uri/?code=CODE&state=STATE。
-
-```
-code 说明 ： code 作为换取 access_token 的票据，每次用户授权带上的 code 将不一样，code 只能使用一次，5 分钟未被使用自动过期。
-```
-
-### 错误说明
-
-|错误号|说明|
-| --- | --- |
-|40000|appid 不能为空|
-|40001|appid 错误|
-|40002|app 状态错误|
-|40003|redirect_uri 不能为空|
-|40004|redirect_uri 域名与后台配置不一致|
-|40005|scope 不能为空|
-|40006|scope 不存在|
-|40007|scope 错误|
-|40008|response_type 不能为空|
-|40009|response_type 必须是 code|
-
-# 第二步：通过 code 换取 access_token
-
-*注意，因为这一步涉及到 appsecret 的使用，十分重要，必须第三方的服务器中发起，同时开放平台也会有 ip 白名单的设置*
-
-### 发起如下请求
-
-```
-GET
-https://api.youchainapi.com/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
-```
-
-参数说明：
-
-| 参数        | 必须    |  说明  |
-| --------   | -----:   | :----: |
-| appid        | 是      |   应用的 appid    |
-| secret        | 是     |   应用的 appsecret    |
-| code         |是    |填写第一步获取的 code 参数|
-| grant_type        | 是     |   必须是 authorization_code     |
-
-返回说明：
-
-正确返回时的 json 数据如下：
+# 开放平台API 返回语义
 
 ```
 {
-"access_token":"ACCESS_TOKEN",
-"expires_in":7200,
-"openid":"OPENID",
-"scope":"SCOPE"
+  "ret":0, // 0 表示正常， >0 表示发生错误，数值为错误号
+  "data":data, // 可能是任何类型
+  "msg":"error msg" // 发生错误时，才会有该字段
 }
 ```
 
-|字段|说明|
-| --- | --- |
-|access_token|调用此用户信息 API 的凭证|
-|expires_in|access_token 接口调用凭证超时时间，单位（秒）|
-|openid|用户唯一标识|
-|scope	|用户授权的作用域|
+# 授权登录接口 
+（需 scope 为 snsapi_base）
 
-错误返回，示例为 code 无效错误：
+请参考 [【授权登录文档】](auth.md) [【授权登录接入示例】](auth-simple.md)
 
-```
-{"errcode":41006,"errmsg":"已过期"}
-```
+# 获取用户信息接口
+（需 scope 为 snsapi_userinfo）
 
-### 错误说明
+请参考 [【用户信息API文档】](api.md)
 
-|错误号|说明|
-| --- | --- |
-|41001|appid 不能为空|
-|41002|appid 错误|
-|41003|code 不能为空|
-|41004|code 不存在|
-|41005|code 已使用过|
-|41006|code 已过期|
-|41007|secret 不能为空|
-|41008|secret 错误|
-|41009|grant_type 必须是 authorization_code|
+# 支付接口
+（需dapp已绑定用于收款的有令用户id）
 
-# 第三步：拉取用户信息(需 scope 为 snsapi_userinfo)
+请参考 [【支付API文档】](payment.md)     [【JSAPI文档】](jsapi.md) 
 
-请参考 [用户API文档](api.md)
+# 用户资产接口 
+（需 scope 为 snsapi_asset）    
 
-# 有令开放平台支付服务端接口
+请参考 [【用户资产API文档】](asset.md)
 
-请参考 [支付API文档](payment.md)
+# 发放奖励接口 
+（需 scope 为 snsapi_reward）     
+（需dapp已绑定用于付款的有令用户id）     
 
-# 有令开放平台支付JSAPI接口
+请参考 [【奖励接口API文档】](reward.md)
 
-请参考 [JSAPI文档](jsapi.md)
+# 公共错误码
+
+请参考 [【公共错误码】](error.md)

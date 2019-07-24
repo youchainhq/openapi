@@ -1,12 +1,3 @@
-# API 返回语义
-
-```
-{
-  "ret":0, // 0 表示正常， >0 表示发生错误，数值为错误号
-  "data":data, // 可能是任何类型
-  "msg":"error msg" // 发生错误时，才会有该字段
-}
-```
 
 # API 列表
 
@@ -14,7 +5,7 @@
 
 ```
 GET
-https://api.youchainapi.com/users/show?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
+https://dev-open.youchainapi.com/users/show?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
 ```
 
 参数说明：
