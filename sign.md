@@ -56,3 +56,58 @@ Content-Type: application/json
 GET方式：
 appId=yc984a80fbebd32e7fd18f0b61e2cfb2d1&mchId=test_mch_id_001&deviceInfo=WEB&&nonceStr=25c88b08c01f4c28b494cc005054cf86&signType=MD5&body=购买VIP元宝&sign=16A6E08A0A3D88DEC5A9EA6B7ADD0467
 ```
+
+生成sign的示例代码(仅供参考)：java
+```java
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.digest.DigestUtil;
+import cn.hutool.json.JSONUtil;
+import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
+
+public class SignUtil {
+
+    private static final String SIGN_TYPE = "signType";
+    private static final String SIGN = "sign";
+    
+    public static String getSign(Object params, String secret) {
+        TreeMap<String, Object> treeMap = changeObjectToTreeMap(params); // 字典顺序排序
+        return getSign(treeMap, secret);
+    }
+    
+    private static TreeMap<String, Object> changeObjectToTreeMap(Object data) {
+        if (data instanceof Map) {
+            return new TreeMap<>((Map) data);
+        }
+        TreeMap<String, Object> treeMap = Maps.newTreeMap();
+        BeanUtil.beanToMap(data, treeMap, Boolean.FALSE, Boolean.TRUE);
+        return treeMap;
+    }
+    
+    private static String getSign(TreeMap<String, Object> treeMap, String appSecret) {
+        treeMap.remove(SIGN);  // sign不参与签名
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry entry : treeMap.entrySet()) {
+            Object eValue = entry.getValue();
+            if (eValue == null) continue; // 空值不参与签名
+            sb.append("&").append(entry.getKey()).append("=");
+            if (eValue instanceof String || eValue instanceof Character
+                    || eValue instanceof Number || eValue instanceof Boolean) { 
+                if (StringUtils.isNotEmpty(eValue.toString())) {  // 空值不参与签名    
+                    sb.append(eValue);
+                }
+            } else if (eValue instanceof Iterable && CollectionUtil.isNotEmpty((Iterable) eValue)) { // 空集合不参与签名
+                sb.append(JSONUtil.toJsonStr(eValue));  // 集合转化成json格式参与签名
+            } else {
+                sb.append(JSONUtil.toJsonStr(eValue)); // 其它类型对象转化成json参与签名
+            }
+        }
+        String signA = sb.substring(1);
+        String stringSignTemp = signA + "&key=" + appSecret; // 生成stringSignTemp字符串
+        String signExpect = new String(SecureUtil.md5(new String(stringSignTemp.getBytes(Charset.forName("UTF-8"))))).toUpperCase(); //md5并转为大写
+        return signExpect;
+    }
+}
+```
