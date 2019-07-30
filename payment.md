@@ -38,7 +38,7 @@ https://open.youchainapi.com/payment/order/create
 | timeExpire    | 否      | String(14)  | 商家订单失效时间 格式为yyyymmddhhmmss，如2009年12月25日9点10分10秒表示为20091225091010，该时间取自商户服务器 |
 | payType       | 是      | String(32)  | 交易类型 JSAPI -JSAPI支付,NATIVE -Native支付,APP-APP支付 |
 | mchCreateIp   | 是      | String(128) | 商户下单服务器的ip |
-| feeType       | 是      | String(32)  | 币种 默认YOU：YOU |
+| feeType       | 是      | String(32)  | 币种 默认you：you |
 | totalFee      | 是      | String(32)  | 支付总金额 |
 | nonceStr      | 是      | String(32)  | 随机字符串 |
 | signType      | 是      | String(32)  | 签名类型，目前只支持MD5。传MD5 |
@@ -64,7 +64,7 @@ Content-Type: application/json
     "payType": "JSAPI",
     "mchCreateIp": "188.99.36.201",
     "totalFee": "5.22",
-    "feeType": "YOU"
+    "feeType": "you"
 }
 ```
 返回值说明：
@@ -162,7 +162,7 @@ https://open.youchainapi.com/payment/order/query
 | timeStart	      | 商家订单开始时间，格式为yyyyMMddHHmmss |
 | timeExpire	  | 商家订单过期时间，格式为yyyyMMddHHmmss |
 | totalFee	      | 支付金额 |
-| feeType	      | 支付币种：YOU |
+| feeType	      | 支付币种：you |
 | timePaid	      | 实际支付时间，格式为yyyyMMddHHmmss |
 | mchWalletAddress| 商家收款钱包地址 |
 返回值示例：
@@ -187,7 +187,7 @@ https://open.youchainapi.com/payment/order/query
         "timeStart": "20190613163510",
         "timeExpire": "20190623163510",
         "totalFee": 5.22,
-        "feeType": "YOU",
+        "feeType": "you",
         "timePaid": "20190619164504",
         "mchWalletAddress": "wallet_address_001"
     }
@@ -229,7 +229,7 @@ POST
 | timeStart     | String(14)  | 商家交易起始时间 格式为yyyyMMddHHmmss，如2009年12月25日9点10分10秒表示为20091225091010 |
 | timeExpire    | String(14)  | 商家订单失效时间 格式为yyyymmddhhmmss，如2009年12月25日9点10分10秒表示为20091225091010 |
 | totalFee      | String(32)  | 支付总金额 |
-| feeType       | String(32)  | 币种 默认YOU：YOU |
+| feeType       | String(32)  | 币种 默认you：you |
 | timePaid      | String(14)  | 订单实际支付时间 格式为yyyymmddhhmmss，如2009年12月25日9点10分10秒表示为20091225091010 |
 | mchWalletAddress|String(128)| 商家收款钱包地址 |
 | nonceStr      | String(32)  | 随机字符串 |
@@ -254,8 +254,8 @@ Content-Type: application/json
     "attach": "storeId=220000011&operator=lzol",
     "timeStart": "20190613163510",
     "timeExpire": "20190623163510",
-    "totalFee": 5.22,
-    "feeType": "YOU",
+    "totalFee": "5.22",
+    "feeType": "you",
     "mchWalletAddress", "wallet_address_001",
     "timePaid": "20190619164504"
 }
