@@ -186,7 +186,7 @@ https://open.youchainapi.com/payment/order/query
         "attach": "storeId=220000011&operator=lzol",
         "timeStart": "20190613163510",
         "timeExpire": "20190623163510",
-        "totalFee": 5.22,
+        "totalFee": "5.22",
         "feeType": "you",
         "timePaid": "20190619164504",
         "mchWalletAddress": "wallet_address_001"
