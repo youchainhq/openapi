@@ -92,16 +92,15 @@ public class SignUtil {
         for (Map.Entry entry : treeMap.entrySet()) {
             Object eValue = entry.getValue();
             if (eValue == null) continue; // 空值不参与签名
-            sb.append("&").append(entry.getKey()).append("=");
             if (eValue instanceof String || eValue instanceof Character
                     || eValue instanceof Number || eValue instanceof Boolean) { 
                 if (StringUtils.isNotEmpty(eValue.toString())) {  // 空值不参与签名    
-                    sb.append(eValue);
+                    sb.append("&").append(entry.getKey()).append("=").append(eValue);
                 }
             } else if (eValue instanceof Iterable && CollectionUtil.isNotEmpty((Iterable) eValue)) { // 空集合不参与签名
-                sb.append(JSONUtil.toJsonStr(eValue));  // 集合转化成json格式参与签名
+                sb.append("&").append(entry.getKey()).append("=").append(JSONUtil.toJsonStr(eValue));  // 集合转化成json格式参与签名
             } else {
-                sb.append(JSONUtil.toJsonStr(eValue)); // 其它类型对象转化成json参与签名
+                sb.append("&").append(entry.getKey()).append("=").append(JSONUtil.toJsonStr(eValue)); // 其它类型对象转化成json参与签名
             }
         }
         String signA = sb.substring(1);
