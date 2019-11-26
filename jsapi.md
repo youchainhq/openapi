@@ -51,7 +51,7 @@ dapp.payment.pay(params) // 唤起支付窗口
 - 唤起分享：
 
 ```JavaScript
-dapp.shareUtil.share(options , extra = {}) // 唤起支付窗口
+dapp.shareUtil.share(options , extra = {}) // 唤起分享窗口
 
 let options = {
     "title":`我在有令赚了 10 YOU`,
