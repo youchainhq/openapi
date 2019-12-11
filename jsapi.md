@@ -45,6 +45,9 @@ dapp.navigation.goBack() // 返回操作
 - 唤起支付：
 
 ```JavaScript
+/*
+  params: 下单接口（payment/order/create），返回参数
+ */
 dapp.payment.pay(params) // 唤起支付窗口
 ```
 

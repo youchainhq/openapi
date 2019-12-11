@@ -16,7 +16,7 @@
 
 ## 统一下单接口（dapp服务端调用） 
 接口说明：  
-该接口用于dapp支付时下单操作，成功后将支付数据传递给jsapi以唤醒有令支付插件，弹出支付密码输入框并完成后续支付流程
+该接口用于dapp支付时下单操作，成功后将支付数据传递给 jsapi（dapp.payment.pay(params)） 以唤醒有令支付插件，弹出支付密码输入框并完成后续支付流程
 ```
 POST
 https://open.youchainapi.com/payment/order/create
