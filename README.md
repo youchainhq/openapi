@@ -47,7 +47,7 @@ V1.1.0
 # 支付接口
 （需dapp已绑定用于收款的有令用户id）
 
-请参考 [【支付API文档】](payment.md)     [【JS API文档】](jsapi.md) 
+请参考 [【支付API文档】](payment.md)     [【dapp-JS API文档】](jsapi.md) 
 
 # 用户资产接口 
 （需 scope 为 snsapi_asset）    
