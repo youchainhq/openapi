@@ -4,6 +4,10 @@
 
 ## 当前版本为 0.x
 
+### App userAgent 说明
+
+> userAgent : YOUChainBrowser/3.3.71(3.0.2)
+
 ## 引入
 
 支持以下几种安装方式
