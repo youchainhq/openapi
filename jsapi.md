@@ -21,7 +21,7 @@
 
 ## 使用
 
-- 初始化SDK：
+- SDK 初始化：
 
 ```JavaScript
 let dapp = new window.YOUChainDapp.Agent(window, (type, data)=>{
@@ -31,7 +31,9 @@ let dapp = new window.YOUChainDapp.Agent(window, (type, data)=>{
         error_callback()
     } else if (type === YOUChainDapp.PAYMENT_TYPE.cancel) {
         cancel_callback()
-    }
+    } else if (type === YOUChainDapp.COMMON_TYPE.version) { //可选
+        // 监听客户端版本，可以用于判断是否初始化成功
+    } 
 });
 
 ```
