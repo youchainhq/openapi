@@ -1,6 +1,6 @@
 # Youchain-JavaScript-SDK
 
-基于 YOUCHAIN 开发的前端 JavaScript SDK
+基于 YOUCHAIN 开发的前端 JavaScript SDK，依赖[有令客户端App]，只能在[有令客户端App]中访问 Dpp，才能进行初始化。
 
 ## 当前版本为 0.x
 
@@ -25,11 +25,11 @@
 
 ```JavaScript
 let dapp = new window.YOUChainDapp.Agent(window, (type, data)=>{
-    if (type === YOUChainDapp.PAYMENT_TYPE.success) {
+    if (type === YOUChainDapp.PAYMENT_TYPE.success) { //支付成功
         success_callback()
-    } else if (type === YOUChainDapp.PAYMENT_TYPE.error) {
+    } else if (type === YOUChainDapp.PAYMENT_TYPE.error) { //支付出错
         error_callback()
-    } else if (type === YOUChainDapp.PAYMENT_TYPE.cancel) {
+    } else if (type === YOUChainDapp.PAYMENT_TYPE.cancel) { //支付取消
         cancel_callback()
     } else if (type === YOUChainDapp.COMMON_TYPE.version) { //可选
         // 监听客户端版本，可以用于判断是否初始化成功
