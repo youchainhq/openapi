@@ -17,6 +17,13 @@
 
 > 补充说明：1、第一次授权时，先使用 "入口地址" 进入页面 2、已经授权且在有效时效内时，先使用 "回调地址"(redirectUriHost) 进入页面
 
+# 环境使用说明
+```text
+1、测试环境： https://dev-open.youchainapi.com/
+
+2、线上环境： https://open.youchainapi.com/
+```
+
 # 第一步：请求 code
 
 ### 引导用户打开如下页面
