@@ -65,6 +65,7 @@ dapp.shareUtil.share(options , extra = {}) // 唤起分享窗口
 let options = {
     "title":`我在有令赚了 10 YOU`,
     "text": `快下载有令App和我一起赚赚赚！`,
+    "url": "https://h5.iyouchain.com/download.html", //在微信、微博，Facebook等平台中使用
     "disableLocale": true,
     "images": [data.url], // 分享图片，分享时，前端不展示
     "type": 0
