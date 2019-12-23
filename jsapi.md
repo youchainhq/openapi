@@ -41,7 +41,7 @@ let dapp = new window.YOUChainDapp.Agent(window, (type, data)=>{
  #### Example
  - 返回：
  ```JavaScript
-dapp.navigation.goBack() // 返回操作
+dapp.navigation.goBack(); // 返回操作
  ```
 
 ### 2. `Pay` 是Youchain Dapp中的支付模块，用来进行支付相关操作
@@ -54,13 +54,13 @@ dapp.navigation.goBack() // 返回操作
 /*
   params: 下单接口（payment/order/create），返回参数
  */
-dapp.payment.pay(params) // 唤起支付窗口
+dapp.payment.pay(params); // 唤起支付窗口
 ```
 
 - 唤起分享：
 
 ```JavaScript
-dapp.shareUtil.share(options , extra = {}) // 唤起分享窗口
+dapp.shareUtil.share(options , extra = {}); // 唤起分享窗口
 
 let options = {
     "title":`我在有令赚了 10 YOU`,
@@ -78,7 +78,7 @@ let extra = {
         include:["Download"], //包含渠道
         exclude:["CopyLink"] //不包含渠道
     }
-}
+};
 
 ```
 
@@ -90,15 +90,15 @@ let extra = {
 
 - 发送自定义命令
 ```JavaScript
- dapp.postMessage(type, data) 
+ dapp.postMessage(type, data);
  
- eg : 唤起另一个 webview 
+ //1、 唤起另一个 webview 
   dapp.postMessage("go_url", {
     title: "快下载有令App ！",
     url: "https://h5.iyouchain.com/download.html",
     navigationHidden: false, //不隐藏标题栏
     shareMenu: true, //显示分享
-    disableLocale: true})  
+    disableLocale: true});  
 ```
 
 ### 许可证
