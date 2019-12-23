@@ -88,6 +88,19 @@ let extra = {
 可选：UChain（有令逛逛）、Download（本地保存图片）
 ```
 
+- 发送自定义命令
+```JavaScript
+ dapp.postMessage(type, data) 
+ 
+ eg : 唤起另一个 webview 
+  dapp.postMessage("go_url", {
+    title: "快下载有令App ！",
+    url: "https://h5.iyouchain.com/download.html",
+    navigationHidden: false, //不隐藏标题栏
+    shareMenu: true, //显示分享
+    disableLocale: true})  
+```
+
 ### 许可证
 
 > Copyright (c) 2019 youchain.cc
