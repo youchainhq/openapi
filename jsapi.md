@@ -97,7 +97,6 @@ let extra = {
     title: "有令，你就是中心", //自定义字段
     url: "https://h5.iyouchain.com/download.html",
     navigationHidden: false, //不隐藏标题栏
-    shareMenu: true, //显示分享
     disableLocale: true});  
 ```
 
