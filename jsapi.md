@@ -94,7 +94,7 @@ let extra = {
  
  //1、 唤起另一个 webview 
   dapp.postMessage("go_url", {
-    title: "快下载有令App ！",
+    title: "有令，你就是中心", //自定义字段
     url: "https://h5.iyouchain.com/download.html",
     navigationHidden: false, //不隐藏标题栏
     shareMenu: true, //显示分享
