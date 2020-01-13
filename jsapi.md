@@ -25,7 +25,9 @@
 
 ```JavaScript
 let dapp = new window.YOUChainDapp.Agent(window, (type, data)=>{
-    if (type === YOUChainDapp.PAYMENT_TYPE.success) { //支付成功
+    if (type === YOUChainDapp.PAYMENT_TYPE.start) { //开始支付
+        
+    } else if (type === YOUChainDapp.PAYMENT_TYPE.success) { //支付成功
         success_callback()
     } else if (type === YOUChainDapp.PAYMENT_TYPE.error) { //支付出错
         error_callback()
