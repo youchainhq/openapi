@@ -2,7 +2,7 @@
 
 基于 YOUCHAIN 开发的前端 JavaScript SDK，依赖[有令客户端App]，只能在[有令客户端App]中访问 Dpp，才能进行初始化。
 
-## 当前版本为 0.x
+## 当前版本为 1.0.5
 
 ### App userAgent 说明
 
@@ -15,7 +15,7 @@
 * 直接使用静态文件地址：
 
   ```
-  https://ucstatic.iyouchain.com/sdk/youchainDapp/dapp-1.0.3.min.js
+  https://ucstatic.iyouchain.com/sdk/youchainDapp/dapp-1.0.5.min.js
   ```
   通过sctipt标签引入该文件，会在全局生成名为 `YOUChainDapp` 的对象
 
@@ -70,7 +70,9 @@ let options = {
     "url": "https://h5.iyouchain.com/download.html", //在微信、微博，Facebook等平台中使用
     "disableLocale": true,
     "images": [data.url], // 分享图片，分享时，前端不展示
-    "type": 0
+    "type": 0,
+    "jumpDapp": false, // 默认不设置，需要通过分享链接跳转到有令 Dapp 时，设置 true
+    "jumpParams": {"title":"测试"} //配合 jumpDapp = true 时使用, title 为顶部标题，可进行修改, url 为 Dapp 入口地址
 };
 
 //可选
@@ -87,7 +89,8 @@ let extra = {
 ###### 分享渠道说明：
 ```
 默认：Facebook、Twitter、Line、QQ、Wechat、WechatMoments、SinaWeibo、CopyLink（复制链接）
-可选：UChain（有令逛逛）、Download（本地保存图片）
+可选：YOUFriends（有令好友）、UChain（有令逛逛）、Download（本地保存图片）、OuterWeb
+特殊情况：YOUFriends,OuterWeb 在exclude 中时才会显示
 ```
 
 - 发送自定义命令
