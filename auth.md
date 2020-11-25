@@ -14,7 +14,7 @@
 
 如下图：
 
-![时序图](arts/oauth20-sequence.png)
+![Alt text](arts/oauth20-sequence.png)
 
 # 授权补充说明：
 
