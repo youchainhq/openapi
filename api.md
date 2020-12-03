@@ -1,11 +1,11 @@
 
 # API 列表
 
-## /users/show
+## /users/find
 
 ```
 GET
-https://dev-open.youchainapi.com/users/show?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
+https://dev-open.youchainapi.com/users/find?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
 ```
 
 参数说明：
@@ -25,19 +25,19 @@ https://dev-open.youchainapi.com/users/show?access_token=ACCESS_TOKEN&openid=OPE
 {
   "ret":0,
   "data":{
-    "openid":" OPENID",
-    "username": USERNAME,
+    "openId":" OPENID",
+    "userName": USERNAME,
     "gender":1,
     "avatar":"https://ucimg.ihuanqu.com/avatar/54f69c/6b83f463310db6b2c8181d09fc-1600614462193664.jpg",
-    "cloudauth":"1"
+    "cloudAuth":"1"
   }
 }
 ```
 
 |字段|说明|
 | --- | --- |
-|openid|用户的唯一标识|
-|username|用户名|
+|openId|用户的唯一标识|
+|userName|用户名|
 |gender|性别 0 未设置 1 男 2 女|
 |avatar	|头像|
-|cloudauth| 0 未认证,  1 认证中 2 通过认证  3 临时认证  4 认证失败|
+|cloudAuth| 0 未认证,  1 认证中 2 通过认证  3 临时认证  4 认证失败|

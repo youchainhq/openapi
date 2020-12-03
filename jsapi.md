@@ -90,7 +90,6 @@ let extra = {
 ```
 默认：Facebook、Twitter、Line、QQ、Wechat、WechatMoments、SinaWeibo、CopyLink（复制链接）
 可选：YOUFriends（有令好友）、UChain（有令逛逛）、Download（本地保存图片）、OuterWeb
-特殊情况：YOUFriends,OuterWeb 在exclude 中时才会显示
 ```
 
 - 发送自定义命令
