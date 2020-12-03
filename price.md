@@ -19,7 +19,7 @@ https://dev-open.youchainapi.com/price/you
     "data":
         {
             "priceUsdt": "0.0059",
-            "prictCny": "0.0388"
+            "priceCny": "0.0388"
         }
 }
 ```
@@ -27,5 +27,5 @@ https://dev-open.youchainapi.com/price/you
 |字段|说明|
 | --- | --- |
 |priceUsdt|you-usdt价格|
-|prictCny|人民币价格|
+|priceCny|人民币价格|
 
