@@ -49,8 +49,18 @@ Content-Type: application/json
     "msg": "",
     "ret": 0,
     "data": {
-        "rewardId": "201907232035302718351142369065832448",
-        "outTradeNo": "3019061317452700021002010661"
+        "appId": "yc792344e039b583096cd6f84e1a8d8cb0",
+        "mchId": "mch87ca69344dd58a8138e8526c65e32a40",
+        "openId": "NDM1ZjViYzVmZGI4NjMzMWY5Njk5NjIyMzIxNzZjNTE",
+        "rewardId": "202012042001347767532327764657836032",
+        "outTradeNo": "3019061317452700021002010163",
+        "rewardStatus": "SUCCESS",
+        "body": "奖励分红",
+        "feeType": "you",
+        "amount": "6.7",
+        "nonceStr": "db0eccc8233c40338607edf08f1c5e40",
+        "signType": "MD5",
+        "sign": "B6F6EFF45FDFD975272EFA1EC0C42745"
     }
 }
 ```
@@ -59,6 +69,7 @@ Content-Type: application/json
 | --- | --- |
 |rewardId|有令开放平台交易号|
 |outTradeNo|商户订单号|
+|rewardStatus|奖励状态 INIT初始化，未开始奖励 SUCCESS奖励成功 FAILED奖励失败|
 
 错误说明：
 
