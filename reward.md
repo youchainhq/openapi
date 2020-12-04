@@ -122,8 +122,8 @@ https://dev-open.youchainapi.com/reward/order/query
 | outTradeNo      | 商户订单号 |
 | rewardStatus    | 订单状态：SUCCESS已成功，FAILED已失败，INIT奖励中 |
 | body	          | 商品描述 |
-| totalFee	      | 支付金额 |
-| feeType	      | 支付币种 you：YOU copper_coin：铜币|
+| amount	      | 奖励金额 |
+| feeType	      | 奖励币种 you：YOU copper_coin：铜币|
 返回值示例：
 ```$xslt
 {
